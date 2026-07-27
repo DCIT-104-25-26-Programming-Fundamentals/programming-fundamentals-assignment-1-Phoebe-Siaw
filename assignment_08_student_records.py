@@ -89,4 +89,81 @@
 # =============================================================================
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
+def add_student(records):
+	name = input("Student name: ").strip()
+	try:
+		sid = int(input("Student ID: ").strip())
+	except ValueError:
+		print("Error: ID must be a number.")
+		return
+	try:
+		count = int(input("How many scores? "))
+	except ValueError:
+		print("Error: please enter an integer.")
+		return
+	scores = []
+	for i in range(1, count + 1):
+		try:
+			s = float(input(f"Enter score {i}: "))
+		except ValueError:
+			print("Error: please enter a numeric score.")
+			return
+		scores.append(s)
+	student = {"name": name, "id": sid, "scores": scores}
+	records.append(student)
+	print(f'Student "{name}" added successfully.')
+
+
+def display_students(records):
+	if not records:
+		print("No students yet.")
+		return
+	print("--------------------------------------------------")
+	print("Name           ID          Scores         Average")
+	print("--------------------------------------------------")
+	for s in records:
+		scores_str = ", ".join(str(int(x)) if float(x).is_integer() else f"{x}" for x in s["scores"])
+		avg = round(sum(s["scores"]) / len(s["scores"]), 2) if s["scores"] else 0.00
+		print(f"{s['name']:<15} {s['id']:<10} {scores_str:<15} {avg}")
+	print("--------------------------------------------------")
+
+
+def calculate_average_for_student(records):
+	try:
+		sid = int(input("Enter student ID: "))
+	except ValueError:
+		print("Error: ID must be a number.")
+		return
+	for s in records:
+		if s["id"] == sid:
+			if not s["scores"]:
+				print(f"{s['name']} has no scores.")
+				return
+			avg = round(sum(s["scores"]) / len(s["scores"]), 2)
+			print(f"{s['name']}'s average score: {avg}")
+			return
+	print("Error: student ID not found.")
+
+
+def main():
+	records = []
+	while True:
+		print("\n===============================\n   STUDENT RECORD SYSTEM MENU\n===============================")
+		print("1. Add student\n2. Display all students\n3. Calculate average score\n4. Quit")
+		choice = input("Enter your choice (1-4): ").strip()
+		if choice == '1':
+			add_student(records)
+		elif choice == '2':
+			display_students(records)
+		elif choice == '3':
+			calculate_average_for_student(records)
+		elif choice == '4':
+			print("Goodbye!")
+			break
+		else:
+			print("Error: invalid choice.")
+
+
+if __name__ == "__main__":
+	main()
 

@@ -67,4 +67,83 @@
 # =============================================================================
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
+def add(a, b):
+	return a + b
+
+
+def subtract(a, b):
+	return a - b
+
+
+def multiply(a, b):
+	return a * b
+
+
+def divide(a, b):
+	if b == 0:
+		raise ZeroDivisionError
+	return round(a / b, 2)
+
+
+def modulus(a, b):
+	if b == 0:
+		raise ZeroDivisionError
+	return a % b
+
+
+def exponent(a, b):
+	return a ** b
+
+
+def get_number(prompt):
+	try:
+		return float(input(prompt))
+	except ValueError:
+		raise
+
+
+def main():
+	while True:
+		print("\n============================\n     SIMPLE CALCULATOR\n============================")
+		print("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Modulus\n6. Exponentiation\n7. Quit")
+		choice = input("Select an operation (1-7): ").strip()
+		if choice == '7':
+			print("Goodbye!")
+			break
+		if choice not in {'1','2','3','4','5','6'}:
+			print("Error: invalid choice.")
+			continue
+		try:
+			a = get_number("Enter first number : ")
+			b = get_number("Enter second number: ")
+		except ValueError:
+			print("Error: please enter numeric values.")
+			continue
+
+		try:
+			if choice == '1':
+				res = add(a, b)
+				op = '+'
+			elif choice == '2':
+				res = subtract(a, b)
+				op = '-'
+			elif choice == '3':
+				res = multiply(a, b)
+				op = '*'
+			elif choice == '4':
+				res = divide(a, b)
+				op = '/'
+			elif choice == '5':
+				res = modulus(a, b)
+				op = '%'
+			elif choice == '6':
+				res = exponent(a, b)
+				op = '**'
+			print(f"Result: {a} {op} {b} = {res}")
+		except ZeroDivisionError:
+			print("Error: Cannot divide by zero.")
+
+
+if __name__ == "__main__":
+	main()
 

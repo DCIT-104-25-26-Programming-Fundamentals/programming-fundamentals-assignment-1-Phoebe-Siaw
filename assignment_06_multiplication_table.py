@@ -54,4 +54,45 @@
 # =============================================================================
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
+def print_table(n):
+	print(f"Multiplication Table for {n}:")
+	for i in range(1, 13):
+		print(f"{n}  x  {i}  =  {n * i}")
+
+
+def print_tables_upto(N):
+	for num in range(1, N + 1):
+		print_table(num)
+		if num != N:
+			print("---------------------------")
+
+
+def main():
+	choice = input("Enter 1 for single table or 2 for tables 1..N: ").strip()
+	if choice == '1':
+		try:
+			n = int(input("Enter a number: "))
+		except ValueError:
+			print("Error: enter a positive integer.")
+			return
+		if n <= 0:
+			print("Error: N must be positive.")
+			return
+		print_table(n)
+	elif choice == '2':
+		try:
+			N = int(input("Enter N: "))
+		except ValueError:
+			print("Error: enter a positive integer.")
+			return
+		if N <= 0:
+			print("Error: N must be positive.")
+			return
+		print_tables_upto(N)
+	else:
+		print("Invalid choice")
+
+
+if __name__ == "__main__":
+	main()
 
